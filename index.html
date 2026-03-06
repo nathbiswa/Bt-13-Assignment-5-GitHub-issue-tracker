@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwing + DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <!-- faveIcon -->
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <title>GitHub Issue Traker</title>
+</head>
+
+<section id="login-container">
+    <div class="login-page h-[90vh] max-w-md mx-auto shadow-lg  ">
+        <div class="login-header text-center p-6">
+            <img src="./assets/github-logo.png" alt="" class="w-[90px] mx-auto mb-5">
+            <h1 class="font-bold text-2xl">GitHub Issues Tracker</h1>
+            <p class="text-[#64748B]">Sign in to manage your issues</p>
+
+        </div>
+        <!-- form container -->
+        <div id="from-container" class="p-7">
+            <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+               
+                <label class="label">Username</label>
+                <input id="inputUserName" type="text" class="input w-full" placeholder="Enter Username" />
+
+                <label class="label">Password</label>
+                <input id="inputPassword" type="password" class="input w-full" placeholder="Enter Password" />
+
+                <button id="login-btn" class="btn bg-[#4A00FF] text-white mt-4">Sign In</button>
+            </fieldset>
+        </div>
+
+
+    </div>
+</section>
+
+
+<script src="./script.js"></script>
+
+<body>
+
+</body>
+
+</html>
