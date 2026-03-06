@@ -2,3 +2,14 @@
 *{
      font-family: "Geist", sans-serif;
 }
+
+img{
+    max-width: 100%;
+}
+
+.primary-color{
+    background-color: #4A00FF;
+}
+.secondary-color{
+    background-color: #64748B;
+}

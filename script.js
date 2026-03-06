@@ -14,7 +14,7 @@ const validPassword = inputPassword.value;
 // console.log(validPassword);
 // Match condition
 if(validName === 'admin' && validPassword === 'admin123'){
-    window.location.href("home.html");
+    window.location.assign("home.html");
 } else{
  alert('Please Enter valid User Name and Password');
  return;

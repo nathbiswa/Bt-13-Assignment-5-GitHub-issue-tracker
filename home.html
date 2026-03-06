@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Github / Home</title>
+    <!-- Tailwing + DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <!-- faveIcon -->
+    <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <title> GitHub Issue Traker / Home</title>
 </head>
+
+<header>
+    <div id="header-section" class="w-11/12 mx-auto shadow-sm flex justify-between items-center py-6">
+        <div id="logo" class="logo flex justify-center items-center gap-1">
+            <img src="./assets/github-logo.png" alt="" class="w-[50px]">
+            <h2 class="text-2xl font-bold">GitHub Issues Tracker</h2>
+        </div>
+        <div id="search" class="search flex justify-center items-center gap-2">
+            <label class="input">
+                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                        stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                </svg>
+                <input type="search" required placeholder="Search issues..." />
+                
+            </label>
+            <button class="btn bg-[#4A00FF] text-[white]"><span>+</span>New Issue</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="button-section" class=" w-10/12 mx-auto flex items-center gap-4 p-6 shadow-md mt-10">
+        <button class="btn btn-outline py-5 px-7">All</button>
+        <button class="btn btn-outline py-5 px-7">Open</button>
+        <button class="btn btn-outline py-5 px-7">Closed</button>
+    </section>
+
+    <section id="issueCount" class="w-10/12 mx-auto m-4 border-b-[#48484b56]" >
+        <div class="countDiv flex items-center gap-4">
+            <img src="./assets/Aperture.png" alt="">
+            <div class="countTotal">
+                <span id="totalIssueCount" class="font-bold text-2xl">0 <span>Issues</span></span>
+                <p class="text-[#64748B]">Track and manage your project issues</p>
+            </div>
+        </div>
+        <div class="iconDiv"></div>
+    </section>
+
+</main>
+
+
+<script src="./script.js"></script>
+
 <body>
-    <h2>Home Page</h2>
+
 </body>
+
 </html>
