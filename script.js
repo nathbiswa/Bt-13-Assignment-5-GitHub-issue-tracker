@@ -14,7 +14,7 @@ const validPassword = inputPassword.value;
 // console.log(validPassword);
 // Match condition
 if(validName === 'admin' && validPassword === 'admin123'){
-    window.location.assign("/home.html");
+    window.location.assign("/https://github.com/nathbiswa/Bt-13-Assignment-5-GitHub-issue-tracker/blob/main/home.html");
 } else{
  alert('Please Enter valid User Name and Password');
  return;
