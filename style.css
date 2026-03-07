@@ -13,3 +13,14 @@ img{
 .secondary-color{
     background-color: #64748B;
 }
+
+.border-green{
+    border-top: 8px solid #00A96E;
+    border-radius: 4px 4px 0px 0px;
+
+}
+.border-purpole{
+    border-top: 8px solid #A855F7;
+    border-radius: 4px 4px 0px 0px;
+
+}

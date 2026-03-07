@@ -4,10 +4,18 @@
 const allIssueContainer = document.getElementById('allIssueContainer');
 const totalIssueCount = document.getElementById('totalIssueCount');
 const loadSpiner = document.getElementById('loadingSpiner');
-    
+
 const allIssueBtn = document.getElementById('allIssueBtn');
 const openIssueBtn = document.getElementById('openIssueBtn');
 const closedIssueBtn = document.getElementById('closedIssueBtn');
+const issuTrakerModal = document.getElementById('issuTrakerModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalStatus = document.getElementById('modalStatus');
+const modalAuthorStatusName = document.getElementById('modalAuthorStatusName');
+const modalStatusDate = document.getElementById('modalStatusDate');
+const modalDescription = document.getElementById('modalDescription');
+const authorName = document.getElementById('authorName');
+const modalProperty = document.getElementById('modalProperty');
 
 // Button toggle function
 openIssueBtn.addEventListener('click', function () {
@@ -21,13 +29,13 @@ closedIssueBtn.addEventListener('click', function () {
     allIssueBtn.classList.remove('primary-color');
     openIssueBtn.classList.remove('primary-color');
     closedIssueBtn.classList.add('primary-color');
-  closedIssueBtn.classList.add('text-[white]');
+    closedIssueBtn.classList.add('text-[white]');
 });
 allIssueBtn.addEventListener('click', function () {
     allIssueBtn.classList.remove('primary-color');
     openIssueBtn.classList.remove('primary-color');
     allIssueBtn.classList.add('primary-color');
-  allIssueBtn.classList.add('text-[white]');
+    allIssueBtn.classList.add('text-[white]');
 });
 
 // Total Count 
@@ -51,12 +59,12 @@ async function allIssuLoad() {
     const data = await res.json();
     hideLoading();
     disPlayAllIssue(data.data);
-    
+
     // console.log(allIssueContainer);
 
 }
 // All button Click function
-allIssueBtn.addEventListener('click', async function(){
+allIssueBtn.addEventListener('click', async function () {
     showLoading();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
@@ -66,21 +74,22 @@ allIssueBtn.addEventListener('click', async function(){
 })
 
 // open button Click function
-openIssueBtn.addEventListener('click', async function(){
+openIssueBtn.addEventListener('click', async function () {
     showLoading();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
     hideLoading();
-    const openFilterData = data.data.filter(item=>item.status=='open');
+    const openFilterData = data.data.filter(item => item.status == 'open');
     disPlayAllIssue(openFilterData);
 })
 // Close Button Click function
-closedIssueBtn.addEventListener('click', async function(){
+closedIssueBtn.addEventListener('click', async function () {
     showLoading();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
     hideLoading();
-    const closeFilterData = data.data.filter(item=>item.status=='closed');
+    const closeFilterData = data.data.filter(item => item.status == 'closed');
+  
     disPlayAllIssue(closeFilterData);
 })
 
@@ -91,7 +100,7 @@ function disPlayAllIssue(items, id) {
         const cart = document.createElement('div');
         cart.className = 'shadow';
         cart.innerHTML = `
-    <div  class="cart-wrap p-5 space-y-5">
+    <div  class="cart-wrap p-5 space-y-5" onclick="openIssueModal(${item.id})" >
                 <div id="cart-top" class="flex justify-between items-center">
                     <div class="cart-top-left">
                         <img src="./assets/Open-Status.png" alt="">
@@ -100,15 +109,15 @@ function disPlayAllIssue(items, id) {
                             class="btn bg-[#FEECEC] text-[#EF4444] py-4 px-7 rounded-sm">${item.priority}</button></div>
                 </div>
                 <div id="cart-heading">
-                    <h2 class="text-1xl font-semibold">${item.title}</h2>
+                    <h2 class="text-1xl font-semibold" onclick="openIssueModal(${item.id})">${item.title}</h2>
                 </div>
                 <p id="description" class="text-[#64748B] line-clamp-2">${item.description}</p>
                 <div id="cact-btn" class="flex justify-between items-center gap-3">
                     <button class="btn rounded border-[#FECACA] text-[#EF4444] bg-[#FEECEC] "><span><img src="./assets/kite.png" alt=""></span>
-                        Bug</button>
+                        ${item.labels}</button>
                     <button class="btn rounded text-[#D97706] bg-[#FFF8DB] border-[#FDE68A]"><span><img src="./assets/circle.png" alt=""></span>
-                        help
-                        wanted</button>
+                        ${item.labels}
+                        </button>
 
                 </div>
             </div>
@@ -126,5 +135,22 @@ function disPlayAllIssue(items, id) {
         totalCount();
     });
 
+}
+
+// Open Issue Modal function
+
+async function openIssueModal(id){
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await res.json();
+    const issueDetailes = data.data;
+    console.log(issueDetailes);
+    modalTitle.innerText = issueDetailes.title;
+    modalStatus.innerText = issueDetailes.status;
+    modalAuthorStatusName.innerText = issueDetailes.author;
+    modalDescription.innerText = issueDetailes.description;
+    authorName.innerText = issueDetailes.author;
+    modalProperty.innerText = issueDetailes.priority;
+    // modalStatusDate.innerText = issueDetailes.updatedAt.data.split('T')[0];
+    issuTrakerModal.showModal();
 }
 allIssuLoad();
