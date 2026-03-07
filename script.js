@@ -2,41 +2,96 @@
 // Part-Home page code start here
 // Catch Id with variable
 const allIssueContainer = document.getElementById('allIssueContainer');
+const totalIssueCount = document.getElementById('totalIssueCount');
+const loadSpiner = document.getElementById('loadingSpiner');
+    
+const allIssueBtn = document.getElementById('allIssueBtn');
+const openIssueBtn = document.getElementById('openIssueBtn');
+const closedIssueBtn = document.getElementById('closedIssueBtn');
 
+// Button toggle function
+openIssueBtn.addEventListener('click', function () {
+    allIssueBtn.classList.remove('primary-color');
+    allIssueBtn.classList.add('btn-outline');
+    closedIssueBtn.classList.remove('primary-color');
+    openIssueBtn.classList.add('primary-color');
+    openIssueBtn.classList.add('text-[white]');
+});
+closedIssueBtn.addEventListener('click', function () {
+    allIssueBtn.classList.remove('primary-color');
+    openIssueBtn.classList.remove('primary-color');
+    closedIssueBtn.classList.add('primary-color');
+  closedIssueBtn.classList.add('text-[white]');
+});
+allIssueBtn.addEventListener('click', function () {
+    allIssueBtn.classList.remove('primary-color');
+    openIssueBtn.classList.remove('primary-color');
+    allIssueBtn.classList.add('primary-color');
+  allIssueBtn.classList.add('text-[white]');
+});
+
+// Total Count 
+function totalCount() {
+    const totalIssue = allIssueContainer.children;
+    // console.log(totalIssue.length);
+    totalIssueCount.innerText = totalIssue.length;
+}
+totalCount();
+function showLoading() {
+    loadSpiner.classList.remove('hidden');
+}
+function hideLoading() {
+    loadSpiner.classList.add('hidden');
+}
 // all Issue data fetch
 
 async function allIssuLoad() {
-    
+    showLoading();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
-   disPlayAllIssue(data.data);
-    // console.log(allIssueContainer);
+    hideLoading();
+    disPlayAllIssue(data.data);
     
+    // console.log(allIssueContainer);
+
 }
+// All button Click function
+allIssueBtn.addEventListener('click', async function(){
+    showLoading();
+    const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const data = await res.json();
+    hideLoading();
+    const AllFilterData = data.data;
+    disPlayAllIssue(AllFilterData);
+})
 
-// {
-//     "id": 42,
-//     "title": "Add role-based access control",
-//     "description": "Implement RBAC system with different permission levels for users, moderators, and admins.",
-//     "status": "open",
-//     "labels": [
-//         "enhancement"
-//     ],
-//     "priority": "high",
-//     "author": "rbac_rachel",
-//     "assignee": "security_sam",
-//     "createdAt": "2024-01-23T08:45:00Z",
-//     "updatedAt": "2024-01-23T08:45:00Z"
-// }
+// open button Click function
+openIssueBtn.addEventListener('click', async function(){
+    showLoading();
+    const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const data = await res.json();
+    hideLoading();
+    const openFilterData = data.data.filter(item=>item.status=='open');
+    disPlayAllIssue(openFilterData);
+})
+// Close Button Click function
+closedIssueBtn.addEventListener('click', async function(){
+    showLoading();
+    const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const data = await res.json();
+    hideLoading();
+    const closeFilterData = data.data.filter(item=>item.status=='closed');
+    disPlayAllIssue(closeFilterData);
+})
 
-function disPlayAllIssue(items, id){
- allIssueContainer.innerHTML= "";
-items.forEach((item, id)=>{
-    console.log(item, id);
-    const cart = document.createElement('div');
-    cart.className = 'shadow';
-    cart.innerHTML = `
-    <div class="cart-wrap p-5 space-y-5">
+function disPlayAllIssue(items, id) {
+    allIssueContainer.innerHTML = "";
+    items.forEach((item, id) => {
+        // console.log(item, id);
+        const cart = document.createElement('div');
+        cart.className = 'shadow';
+        cart.innerHTML = `
+    <div  class="cart-wrap p-5 space-y-5">
                 <div id="cart-top" class="flex justify-between items-center">
                     <div class="cart-top-left">
                         <img src="./assets/Open-Status.png" alt="">
@@ -67,8 +122,9 @@ items.forEach((item, id)=>{
                 </div>
             </div>
     `
-    allIssueContainer.appendChild(cart);
-});
+        allIssueContainer.appendChild(cart);
+        totalCount();
+    });
 
 }
 allIssuLoad();

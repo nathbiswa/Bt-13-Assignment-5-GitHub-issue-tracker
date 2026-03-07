@@ -41,10 +41,10 @@
 </header>
 
 <main>
-    <section id="button-section" class=" w-10/12 mx-auto flex items-center gap-4 p-6 shadow-lg mt-10">
-        <button class="btn btn-outline primary-color text-white py-5 px-7">All</button>
-        <button class="btn btn-outline py-5 px-7">Open</button>
-        <button class="btn btn-outline py-5 px-7">Closed</button>
+    <section id="button-section" class="  w-10/12 mx-auto flex items-center gap-4 p-6 shadow-lg mt-10">
+        <button id="allIssueBtn" class="btn btn-outline primary-color text-white py-5 px-7">All</button>
+        <button id="openIssueBtn" class="btn btn-outline  py-5 px-7">Open</button>
+        <button id="closedIssueBtn" class="btn btn-outline  py-5 px-7">Closed</button>
     </section>
 
     <section id="issueCount" class="w-10/12 mx-auto m-6 border-b-[#48484b] shadow-xl">
@@ -52,8 +52,11 @@
             <div class="count-wrap flex items-center gap-4">
                 <img src="./assets/Aperture.png" alt="">
                 <div class="countTotal">
-                    <span id="totalIssueCount" class="font-bold text-2xl">0 <span>Issues</span></span>
-                    <p class="text-[#64748B]">Track and manage your project issues</p>
+                    <p id="totalIssueCount" class="  md:text-xl">0</p>
+                    <span>Issues</span>
+                    <p class=" text-[16px] md:text-xl">Track and manage your project issues</p>
+                    <!-- <span id="totalIssueCount" class="font-bold text-2xl"> 0 </span>
+                    <p class="text-[#64748B]">Track and manage your project issues</p> -->
                 </div>
             </div>
 
@@ -71,41 +74,12 @@
         </div>
 
     </section>
-
+    <!-- loading spiner -->
+    <div id="loadingSpiner" class="w-[60vh] mx-auto flex hidden justify-center items-center">
+        <span class="loading loading-spinner loading-xl"></span>
+    </div>
     <section id="allIssueContainer" class="w-10/12 mx-auto m-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-        <!-- <div id="cart" class="shadow ">
-            <div class="cart-wrap p-5 space-y-5">
-                <div id="cart-top" class="flex justify-between items-center">
-                    <div class="cart-top-left">
-                        <img src="./assets/Open-Status.png" alt="">
-                    </div>
-                    <div class="cart-top-right"><button
-                            class="btn bg-[#FEECEC] text-[#EF4444] py-4 px-7 rounded-sm">High</button></div>
-                </div>
-                <div id="cart-heading">
-                    <h2 class="text-1xl font-semibold">Fix navigation menu on mobile devices</h2>
-                </div>
-                <p id="description" class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile
-                    devices...</p>
-                <div id="cact-btn" class="flex justify-between items-center gap-3">
-                    <button class="btn rounded border-[#FECACA] text-[#EF4444] bg-[#FEECEC] "><span><img src="" alt=""></span>
-                        Bug</button>
-                    <button class="btn rounded text-[#D97706] bg-[#FFF8DB] border-[#FDE68A]"><span><img src="" alt=""></span>
-                        help
-                        wanted</button>
 
-                </div>
-            </div>
-
-            <div id="makeDate" class=" border-t-2 border-gray-200 p-4 space-y-2">
-                <div class="createDate">#1
-                    by john_doe
-                </div>
-                <div class="updateDate">
-                    1/15/2024
-                </div>
-            </div>
-        </div> -->
 
     </section>
 
