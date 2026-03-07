@@ -33,7 +33,7 @@
                     </g>
                 </svg>
                 <input type="search" required placeholder="Search issues..." />
-                
+
             </label>
             <button class="btn bg-[#4A00FF] text-[white]"><span>+</span>New Issue</button>
         </div>
@@ -41,21 +41,72 @@
 </header>
 
 <main>
-    <section id="button-section" class=" w-10/12 mx-auto flex items-center gap-4 p-6 shadow-md mt-10">
-        <button class="btn btn-outline py-5 px-7">All</button>
+    <section id="button-section" class=" w-10/12 mx-auto flex items-center gap-4 p-6 shadow-lg mt-10">
+        <button class="btn btn-outline primary-color text-white py-5 px-7">All</button>
         <button class="btn btn-outline py-5 px-7">Open</button>
         <button class="btn btn-outline py-5 px-7">Closed</button>
     </section>
 
-    <section id="issueCount" class="w-10/12 mx-auto m-4 border-b-[#48484b56]" >
-        <div class="countDiv flex items-center gap-4">
-            <img src="./assets/Aperture.png" alt="">
-            <div class="countTotal">
-                <span id="totalIssueCount" class="font-bold text-2xl">0 <span>Issues</span></span>
-                <p class="text-[#64748B]">Track and manage your project issues</p>
+    <section id="issueCount" class="w-10/12 mx-auto m-6 border-b-[#48484b] shadow-xl">
+        <div class="countDiv flex items-center justify-between gap-4 p-4">
+            <div class="count-wrap flex items-center gap-4">
+                <img src="./assets/Aperture.png" alt="">
+                <div class="countTotal">
+                    <span id="totalIssueCount" class="font-bold text-2xl">0 <span>Issues</span></span>
+                    <p class="text-[#64748B]">Track and manage your project issues</p>
+                </div>
             </div>
+
+            <div class="iconDiv flex items-center gap-2">
+                <div class="icon-open flex items-center gap-2">
+                    <div class="icon-circle bg-[#00A96E] rounded-full w-4 h-4"></div>
+                    <div class="icon-text text-2xl font-medium">Open</div>
+                </div>
+                <div class="icon-open flex items-center gap-2">
+                    <div class="icon-circle bg-[#A855F7] rounded-full w-4 h-4"></div>
+                    <div class="icon-text text-2xl font-medium">Closed</div>
+                </div>
+            </div>
+
         </div>
-        <div class="iconDiv"></div>
+
+    </section>
+
+    <section id="allIssueContainer" class="w-10/12 mx-auto m-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+        <!-- <div id="cart" class="shadow ">
+            <div class="cart-wrap p-5 space-y-5">
+                <div id="cart-top" class="flex justify-between items-center">
+                    <div class="cart-top-left">
+                        <img src="./assets/Open-Status.png" alt="">
+                    </div>
+                    <div class="cart-top-right"><button
+                            class="btn bg-[#FEECEC] text-[#EF4444] py-4 px-7 rounded-sm">High</button></div>
+                </div>
+                <div id="cart-heading">
+                    <h2 class="text-1xl font-semibold">Fix navigation menu on mobile devices</h2>
+                </div>
+                <p id="description" class="text-[#64748B]">The navigation menu doesn't collapse properly on mobile
+                    devices...</p>
+                <div id="cact-btn" class="flex justify-between items-center gap-3">
+                    <button class="btn rounded border-[#FECACA] text-[#EF4444] bg-[#FEECEC] "><span><img src="" alt=""></span>
+                        Bug</button>
+                    <button class="btn rounded text-[#D97706] bg-[#FFF8DB] border-[#FDE68A]"><span><img src="" alt=""></span>
+                        help
+                        wanted</button>
+
+                </div>
+            </div>
+
+            <div id="makeDate" class=" border-t-2 border-gray-200 p-4 space-y-2">
+                <div class="createDate">#1
+                    by john_doe
+                </div>
+                <div class="updateDate">
+                    1/15/2024
+                </div>
+            </div>
+        </div> -->
+
     </section>
 
 </main>
