@@ -32,19 +32,19 @@
                         <path d="m21 21-4.3-4.3"></path>
                     </g>
                 </svg>
-                <input type="search" required placeholder="Search issues..." />
+                <input id="searchInput" type="search" required placeholder="Search issues..." />
 
             </label>
-            <button class="btn bg-[#4A00FF] text-[white]"><span>+</span>New Issue</button>
+            <button id="searchButton" class="btn bg-[#4A00FF] text-[white]"><span>+</span>New Issue</button>
         </div>
     </div>
 </header>
 
 <main>
     <section id="button-section" class="  w-10/12 mx-auto flex items-center gap-4 p-6 shadow-lg mt-10">
-        <button id="allIssueBtn" class="btn btn-outline primary-color text-white py-5 px-7">All</button>
-        <button id="openIssueBtn" class="btn btn-outline  py-5 px-7">Open</button>
-        <button id="closedIssueBtn" class="btn btn-outline  py-5 px-7">Closed</button>
+        <button id="allIssueBtn" class="btn btn-outline text-gray primary-color py-5 px-7">All</button>
+        <button id="openIssueBtn" class="btn btn-outline text-gray py-5 px-7">Open</button>
+        <button id="closedIssueBtn" class="btn btn-outline text-gray py-5 px-7">Closed</button>
     </section>
 
 
@@ -98,7 +98,7 @@
                 <div class="modal-status flex items-center gap-4 my-5">
                     <div><button id="modalStatus" class="btn btn-primary">status</button></div>
                     <h2 id="modalAuthorStatusName"> Opened by: Authorname</h2>
-                    <span class="modalStatusDate">Date</span>
+                    <span id="modalStatusDate" class="modalStatusDate">Date</span>
                 </div>
 
                 <div id="cact-btn" class="flex  items-center gap-3 my-6">

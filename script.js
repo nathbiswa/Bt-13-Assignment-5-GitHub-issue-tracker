@@ -16,26 +16,51 @@ const modalStatusDate = document.getElementById('modalStatusDate');
 const modalDescription = document.getElementById('modalDescription');
 const authorName = document.getElementById('authorName');
 const modalProperty = document.getElementById('modalProperty');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+
+
+// search button and function
+
+searchButton.addEventListener('click', async function () {
+    const searchInputValue = searchInput.value;
+    showLoading();
+    // console.log(searchInputValue);
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInputValue}`);
+    const data = await res.json();
+    hideLoading();
+    // console.log(data);
+    // const searchMatchData = data.data.filter(item => item.title == searchInputValue);
+    // console.log(searchMatchData);
+    disPlayAllIssue(data.data);
+})
 
 // Button toggle function
 openIssueBtn.addEventListener('click', function () {
     allIssueBtn.classList.remove('primary-color');
     allIssueBtn.classList.add('btn-outline');
     closedIssueBtn.classList.remove('primary-color');
+    closedIssueBtn.classList.add('btn-outline');
+    closedIssueBtn.classList.add('text-black');
     openIssueBtn.classList.add('primary-color');
-    openIssueBtn.classList.add('text-[white]');
+    openIssueBtn.classList.add('text-black');
 });
 closedIssueBtn.addEventListener('click', function () {
     allIssueBtn.classList.remove('primary-color');
+    allIssueBtn.classList.add('btn-outline');
     openIssueBtn.classList.remove('primary-color');
+    openIssueBtn.classList.add('btn-outline');
     closedIssueBtn.classList.add('primary-color');
     closedIssueBtn.classList.add('text-[white]');
 });
 allIssueBtn.addEventListener('click', function () {
-    allIssueBtn.classList.remove('primary-color');
+    
     openIssueBtn.classList.remove('primary-color');
+    closedIssueBtn.classList.remove('primary-color');
+    closedIssueBtn.classList.add('text-black');
+    closedIssueBtn.classList.add('btn-outline');
     allIssueBtn.classList.add('primary-color');
-    allIssueBtn.classList.add('text-[white]');
+    allIssueBtn.classList.add('text-[white');
 });
 
 // Total Count 
@@ -89,7 +114,7 @@ closedIssueBtn.addEventListener('click', async function () {
     const data = await res.json();
     hideLoading();
     const closeFilterData = data.data.filter(item => item.status == 'closed');
-  
+
     disPlayAllIssue(closeFilterData);
 })
 
@@ -139,18 +164,18 @@ function disPlayAllIssue(items, id) {
 
 // Open Issue Modal function
 
-async function openIssueModal(id){
+async function openIssueModal(id) {
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
     const issueDetailes = data.data;
-    console.log(issueDetailes);
+    // console.log(issueDetailes);
     modalTitle.innerText = issueDetailes.title;
     modalStatus.innerText = issueDetailes.status;
     modalAuthorStatusName.innerText = issueDetailes.author;
     modalDescription.innerText = issueDetailes.description;
     authorName.innerText = issueDetailes.author;
     modalProperty.innerText = issueDetailes.priority;
-    // modalStatusDate.innerText = issueDetailes.updatedAt.data.split('T')[0];
+    modalStatusDate.innerText = issueDetailes.createdAt;
     issuTrakerModal.showModal();
 }
 allIssuLoad();
