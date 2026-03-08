@@ -18,6 +18,7 @@ const authorName = document.getElementById('authorName');
 const modalProperty = document.getElementById('modalProperty');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
+const cactBtn = document.getElementById('cact-btn');
 
 
 // search button and function
@@ -114,18 +115,20 @@ closedIssueBtn.addEventListener('click', async function () {
     const data = await res.json();
     hideLoading();
     const closeFilterData = data.data.filter(item => item.status == 'closed');
-
+   
     disPlayAllIssue(closeFilterData);
 })
 
 function disPlayAllIssue(items, id) {
     allIssueContainer.innerHTML = "";
     items.forEach((item, id) => {
-        // console.log(item, id);
+        console.log(item, id);
+        const labels = item.labels.map(label => `<span class="badge bg-yellow-400">${label}</span>`)
+        .join("");
         const cart = document.createElement('div');
         cart.className = 'shadow';
         cart.innerHTML = `
-    <div  class="cart-wrap p-5 space-y-5" onclick="openIssueModal(${item.id})" >
+    <div  class="${item.status=='open'?'border-t-6 border-green-600 border-radius':'border-t-6 border-purple-600 border-radius'} cart-wrap p-5 space-y-5" onclick="openIssueModal(${item.id})" >
                 <div id="cart-top" class="flex justify-between items-center">
                     <div class="cart-top-left">
                         <img src="./assets/Open-Status.png" alt="">
@@ -137,13 +140,9 @@ function disPlayAllIssue(items, id) {
                     <h2 class="text-1xl font-semibold" onclick="openIssueModal(${item.id})">${item.title}</h2>
                 </div>
                 <p id="description" class="text-[#64748B] line-clamp-2">${item.description}</p>
-                <div id="cact-btn" class="flex justify-between items-center gap-3">
-                    <button class="btn rounded border-[#FECACA] text-[#EF4444] bg-[#FEECEC] "><span><img src="./assets/kite.png" alt=""></span>
-                        ${item.labels}</button>
-                    <button class="btn rounded text-[#D97706] bg-[#FFF8DB] border-[#FDE68A]"><span><img src="./assets/circle.png" alt=""></span>
-                        ${item.labels}
-                        </button>
 
+                <div>
+                    <span > ${labels}</span>
                 </div>
             </div>
 
@@ -169,6 +168,14 @@ async function openIssueModal(id) {
     const data = await res.json();
     const issueDetailes = data.data;
     // console.log(issueDetailes);
+    cactBtn.innerHTML = '';
+    issueDetailes.labels.forEach(item=>{
+        let issuButton = document.createElement('button');
+        issuButton.className= 'badge bg-yellow-400';
+        issuButton.innerText = item;
+        cactBtn.appendChild(issuButton);
+    })
+    console.log(issueDetailes);
     modalTitle.innerText = issueDetailes.title;
     modalStatus.innerText = issueDetailes.status;
     modalAuthorStatusName.innerText = issueDetailes.author;
