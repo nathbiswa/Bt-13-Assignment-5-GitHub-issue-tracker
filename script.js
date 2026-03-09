@@ -55,7 +55,7 @@ closedIssueBtn.addEventListener('click', function () {
     closedIssueBtn.classList.add('text-[white]');
 });
 allIssueBtn.addEventListener('click', function () {
-    
+
     openIssueBtn.classList.remove('primary-color');
     closedIssueBtn.classList.remove('primary-color');
     closedIssueBtn.classList.add('text-black');
@@ -115,7 +115,7 @@ closedIssueBtn.addEventListener('click', async function () {
     const data = await res.json();
     hideLoading();
     const closeFilterData = data.data.filter(item => item.status == 'closed');
-   
+
     disPlayAllIssue(closeFilterData);
 })
 
@@ -124,20 +124,20 @@ function disPlayAllIssue(items, id) {
     items.forEach((item, id) => {
         console.log(item, id);
         const labels = item.labels.map(label => `<span class="badge bg-yellow-400">${label}</span>`)
-        .join("");
+            .join("");
         const cart = document.createElement('div');
         cart.className = 'shadow';
         cart.innerHTML = `
-    <div  class="${item.status=='open'?'border-t-6 border-green-600 border-radius':'border-t-6 border-purple-600 border-radius'} cart-wrap p-5 space-y-5" onclick="openIssueModal(${item.id})" >
+    <div  class="${item.status == 'open' ? 'border-t-6 border-green-600 border-radius' : 'border-t-6 border-purple-600 border-radius'} cart-wrap p-5 space-y-5" onclick="openIssueModal(${item.id})" >
                 <div id="cart-top" class="flex justify-between items-center">
                     <div class="cart-top-left">
                         <img src="./assets/Open-Status.png" alt="">
                     </div>
                     <div class="cart-top-right"><button
-                            class="btn bg-[#FEECEC] text-[#EF4444] py-4 px-7 rounded-sm">${item.priority}</button></div>
+                            class="btn bg-[#FEECEC] text-[#EF4444] py-3 px-5 md:py-4 md:px-7 rounded-sm">${item.priority}</button></div>
                 </div>
                 <div id="cart-heading">
-                    <h2 class="text-1xl font-semibold" onclick="openIssueModal(${item.id})">${item.title}</h2>
+                    <h2 class=" text-xs md:text-1xl font-semibold" onclick="openIssueModal(${item.id})">${item.title}</h2>
                 </div>
                 <p id="description" class="text-[#64748B] line-clamp-2">${item.description}</p>
 
@@ -146,13 +146,26 @@ function disPlayAllIssue(items, id) {
                 </div>
             </div>
 
-            <div id="makeDate" class=" border-t-2 border-gray-200 p-4 space-y-2">
-                <div class="createDate">#${id}
-                    by ${item.author}
+            <div id="makeDate" class=" flex justify-between items-center gap-3 border-t-2 border-gray-200 p-4 space-y-2">
+                <div>
+                <div class="createDate text-[10px] md:text-[12px]">#${id}
+                     ${item.author}
+                </div>  
+                <div class="updateDate text-[10px] md:text-[12px]">
+                   Assignee by: ${item.assignee}
                 </div>
-                <div class="updateDate">
-                    ${item.updatedAt}
+                 </div>
+
+                <div>
+                <div class="createDate text-[10px] md:text-[12px]">
+                    ${item.createdAt}
+                </div>  
+                <div class="updateDate text-[10px] md:text-[12px]">
+                   Updated: ${item.updatedAt}
                 </div>
+                 </div>
+            
+            </div>
             </div>
     `
         allIssueContainer.appendChild(cart);
@@ -164,14 +177,16 @@ function disPlayAllIssue(items, id) {
 // Open Issue Modal function
 
 async function openIssueModal(id) {
+    showLoading();
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
     const data = await res.json();
+    hideLoading();
     const issueDetailes = data.data;
     // console.log(issueDetailes);
     cactBtn.innerHTML = '';
-    issueDetailes.labels.forEach(item=>{
+    issueDetailes.labels.forEach(item => {
         let issuButton = document.createElement('button');
-        issuButton.className= 'badge bg-yellow-400';
+        issuButton.className = 'badge bg-yellow-400';
         issuButton.innerText = item;
         cactBtn.appendChild(issuButton);
     })
